@@ -12,7 +12,7 @@ sudo mkdir -p /data/web_static/shared
 
 sudo echo "Howdee!" | sudo tee /data/web_static/releases/test/index.html
 
-ln -sfn /data/web_static/releases/test/ /data/web_static/current
+sudo ln -sfn /data/web_static/releases/test/ /data/web_static/current
 
 sudo chown -hR ubuntu:ubuntu /data
 
