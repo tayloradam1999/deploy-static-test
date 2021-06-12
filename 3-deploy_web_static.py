@@ -6,7 +6,6 @@ from datetime import datetime
 import os.path
 
 env.hosts = ['34.73.206.41' , '35.175.196.34']
-env.passwords = []
 
 def deploy():
     """ Deploys! """
@@ -16,7 +15,7 @@ def deploy():
     if archive is None:
         return False
 
-    status = do_deploy(archvive)
+    status = do_deploy(archive)
 
     return status
 
@@ -32,10 +31,10 @@ def do_deploy(archive_path):
 
         put(archive_path, '/tmp/' + archiveName)
         run("mkdir -p /data/web_static/releases/" + archiveNameWithoutExtension)
-        run("tar -xzvf /tmp/" + archiveName + " -C " + "/data/web_static/releases/" + archiveNameWithoutExtension + " --strip-components") 
+        run("tar -xzvf /tmp/" + archiveName + " -C " + "/data/web_static/releases/" + archiveNameWithoutExtension + " --strip-components=1") 
         run("rm -f /tmp/" + archiveName)
         run("rm -f /data/web_static/current")
-        run ("sudo ln -sf /data/web_static/releases/" + archiveNameWithoutExtension + " /data/web_static/current")
+        run ("sudo ln -sfn /data/web_static/releases/" + archiveNameWithoutExtension + " /data/web_static/current")
         
         return True
     except:
